@@ -1,0 +1,35 @@
+{
+	"name" : "ekyna/blog-bundle",
+	"description" : "Blog management",
+	"type" : "symfony-bundle",
+	"authors" : [{
+			"name" : "Etienne Dauvergne",
+			"homepage" : "http://ekyna.com"
+		}
+	],
+	"keywords" : [
+		"symfony2",
+		"blog",
+		"bundle"
+	],
+	"homepage" : "https://github.com/ekyna/BlogBundle",
+	"license" : [
+		"MIT"
+	],
+	"require" : {
+		"php" : ">=5.4.0",
+		"ekyna/cms-bundle" : "0.1.*@dev",
+		"ob/highcharts-bundle" : "~1.2"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"Ekyna\\Bundle\\BlogBundle" : ""
+		}
+	},
+	"target-dir" : "Ekyna/Bundle/BlogBundle",
+	"extra" : {
+		"branch-alias" : {
+			"dev-master" : "0.1.x-dev"
+		}
+	}
+}

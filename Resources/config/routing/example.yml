@@ -1,0 +1,25 @@
+ekyna_blog_example_index:
+    path: ""
+    defaults:
+        _controller: EkynaBlogBundle:Example:index
+        _cms:
+            name: Blog
+            menus: [main, footer]
+            advanced: true
+    requirements:
+        _method: GET
+
+ekyna_blog_example_category:
+    path: /{categorySlug}
+    defaults: { _controller: EkynaBlogBundle:Example:category }
+    requirements:
+        _method: GET
+        categorySlug: "[a-zA-Z0-9-]+"
+
+ekyna_blog_example_post:
+    path: /{categorySlug}/{postSlug}
+    defaults: { _controller: EkynaBlogBundle:Example:post }
+    requirements:
+        _method: GET
+        categorySlug: "[a-zA-Z0-9-]+"
+        postSlug: "[a-zA-Z0-9-]+"
