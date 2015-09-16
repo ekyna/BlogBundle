@@ -17,7 +17,8 @@ class LoadFixtureData extends DataFixtureLoader implements OrderedFixtureInterfa
      */
     protected function getFixtures()
     {
-        return array(__DIR__.'/fixtures.yml');
+        //return array(__DIR__.'/fixtures.yml');
+        return array();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Ekyna\Bundle\BlogBundle\Entity;
 
 use Doctrine\DBAL\Types\Type;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Ekyna\Bundle\AdminBundle\Doctrine\ORM\ResourceRepository;
 use Ekyna\Bundle\BlogBundle\Model\CategoryInterface;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
@@ -18,15 +19,15 @@ class PostRepository extends ResourceRepository
     protected $maxPerPage = 6;
 
     /**
-     * Returns the posts pager, optionally filtered by category.
+     * Returns the listing pager.
      *
-     * @param integer $currentPage
+     * @param $currentPage
      * @param CategoryInterface $category
      * @return Pagerfanta
      */
-    public function createPager($currentPage, CategoryInterface $category = null)
+    public function getPaginatedList($currentPage, CategoryInterface $category = null)
     {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->getCollectionQueryBuilder();
         $params = [];
         $now = new \DateTime();
 
@@ -75,7 +76,7 @@ class PostRepository extends ResourceRepository
             return null;
         }
 
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->getQueryBuilder();
         $params = ['slug' => $slug];
         $now = new \DateTime();
 
@@ -114,7 +115,7 @@ class PostRepository extends ResourceRepository
      */
     public function findLatest(CategoryInterface $category = null, $limit = 3)
     {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->getCollectionQueryBuilder();
         $params = [];
         $now = new \DateTime();
 
@@ -135,12 +136,21 @@ class PostRepository extends ResourceRepository
             $params['enabled'] = true;
         }
 
-        return $qb
-            ->getQuery()
+        $qb
             ->setMaxResults($limit)
             ->setParameters($params)
             ->setParameter('now', $now, Type::DATETIME)
-            ->getResult()
+            ->getQuery()
         ;
+
+        return new Paginator($qb->getQuery(), true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getAlias()
+    {
+        return 'p';
     }
 }

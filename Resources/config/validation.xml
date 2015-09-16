@@ -6,15 +6,21 @@
                         http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
     <class name="Ekyna\Bundle\BlogBundle\Entity\Category">
+        <property name="translations">
+            <constraint name="Valid" />
+        </property>
+        <property name="seo">
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Ekyna\Bundle\BlogBundle\Entity\CategoryTranslation">
         <property name="name">
-            <constraint name="NotNull" />
+            <constraint name="NotBlank" />
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
             </constraint>
-        </property>
-        <property name="seo">
-            <constraint name="Valid" />
         </property>
     </class>
 

@@ -15,12 +15,15 @@ class CategoryType extends ResourceFormType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options = array())
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'label' => 'ekyna_core.field.name',
-                'required' => true,
+            ->add('translations', 'a2lix_translationsForms', array(
+                'form_type' => new CategoryTranslationType(),
+                'label'     => false,
+                'attr' => array(
+                    'widget_col' => 12,
+                ),
             ))
             ->add('enabled', 'checkbox', array(
                 'label' => 'ekyna_core.field.enabled',

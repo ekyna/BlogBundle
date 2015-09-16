@@ -18,17 +18,16 @@
 	],
 	"require" : {
 		"php" : ">=5.4.0",
-		"ekyna/cms-bundle" : "0.1.*@dev"
+		"ekyna/cms-bundle" : "0.3.*@dev"
 	},
 	"autoload" : {
-		"psr-0" : {
-			"Ekyna\\Bundle\\BlogBundle" : ""
+		"psr-4" : {
+			"Ekyna\\Bundle\\BlogBundle\\" : ""
 		}
 	},
-	"target-dir" : "Ekyna/Bundle/BlogBundle",
 	"extra" : {
 		"branch-alias" : {
-			"dev-master" : "0.1.x-dev"
+			"dev-master" : "0.3.x-dev"
 		}
 	}
 }

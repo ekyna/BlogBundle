@@ -3,6 +3,7 @@
 namespace Ekyna\Bundle\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Ekyna\Bundle\AdminBundle\Model\AbstractTranslatable;
 use Ekyna\Bundle\BlogBundle\Model\CategoryInterface;
 use Ekyna\Bundle\CmsBundle\Entity\Seo;
 use Ekyna\Bundle\CmsBundle\Model as Cms;
@@ -12,8 +13,10 @@ use Ekyna\Bundle\CoreBundle\Model as Core;
  * Class Category
  * @package Ekyna\Bundle\BlogBundle\Entity
  * @author Étienne Dauvergne <contact@ekyna.com>
+ *
+ * @method CategoryTranslation translate($locale = null, $create = false)
  */
-class Category implements CategoryInterface
+class Category extends AbstractTranslatable implements CategoryInterface
 {
     use Cms\SeoSubjectTrait;
     use Cms\ContentSubjectTrait;
@@ -27,19 +30,9 @@ class Category implements CategoryInterface
     protected $id;
 
     /**
-     * @var string
-     */
-    protected $name;
-
-    /**
      * @var boolean
      */
     protected $enabled;
-
-    /**
-     * @var string
-     */
-    protected $slug;
 
 
     /**
@@ -47,6 +40,8 @@ class Category implements CategoryInterface
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->seo = new Seo();
         $this->contents = new ArrayCollection();
     }
@@ -74,7 +69,7 @@ class Category implements CategoryInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->translate()->setName($name);
 
         return $this;
     }
@@ -84,7 +79,25 @@ class Category implements CategoryInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->translate()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSlug($slug)
+    {
+        $this->translate()->setSlug($slug);
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSlug()
+    {
+        return $this->translate()->getSlug();
     }
 
     /**
@@ -107,20 +120,30 @@ class Category implements CategoryInterface
     /**
      * {@inheritdoc}
      */
-    public function setSlug($slug)
+    public function setCurrentLocale($currentLocale)
     {
-        $this->slug = $slug;
+        $this->seo->setCurrentLocale($currentLocale);
 
-        return $this;
+        return parent::setCurrentLocale($currentLocale);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSlug()
+    public function setFallbackLocale($fallbackLocale)
     {
-        return $this->slug;
+        $this->seo->setFallbackLocale($fallbackLocale);
+
+        return parent::setFallbackLocale($fallbackLocale);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    /*protected function getTranslationClass()
+    {
+        return get_class($this).'Translation';
+    }*/
 
     /**
      * {@inheritdoc}
