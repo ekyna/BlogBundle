@@ -4,7 +4,6 @@ namespace Ekyna\Bundle\BlogBundle\Table\Type;
 
 use Ekyna\Bundle\AdminBundle\Table\Type\ResourceTableType;
 use Ekyna\Component\Table\TableBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class PostType
@@ -16,9 +15,9 @@ class PostType extends ResourceTableType
     /**
      * {@inheritdoc}
      */
-    public function buildTable(TableBuilderInterface $tableBuilder, array $options = array())
+    public function buildTable(TableBuilderInterface $builder, array $options)
     {
-        $tableBuilder
+        $builder
             ->addColumn('title', 'anchor', array(
                 'label' => 'ekyna_core.field.title',
                 'sortable' => true,

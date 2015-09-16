@@ -29,14 +29,14 @@ class ExampleController extends Controller
         $categoryId = intval($categoryId);
         if (0 < $categoryId) {
             /** @var \Ekyna\Bundle\BlogBundle\Model\CategoryInterface $category */
-            $category = $categoryRepo->findOneBySlug($categoryId);
+            $category = $categoryRepo->find($categoryId);
             if (null === $category) {
                 throw new NotFoundHttpException('Category not found.');
             }
         }
 
         /** @var \Ekyna\Bundle\BlogBundle\Model\CategoryInterface[] $categories */
-        $categories = $categoryRepo->findBy(['enabled' => true], ['name' => 'ASC']);
+        $categories = $categoryRepo->findBy(['enabled' => true]);
 
         $postRepo = $this->get('ekyna_blog.post.repository');
         /** @var \Ekyna\Bundle\BlogBundle\Model\PostInterface[] $posts */
@@ -70,11 +70,11 @@ class ExampleController extends Controller
     {
         $categoryRepo = $this->get('ekyna_blog.category.repository');
         /** @var \Ekyna\Bundle\BlogBundle\Model\CategoryInterface[] $categories */
-        $categories = $categoryRepo->findBy(['enabled' => true], ['name' => 'ASC']);
+        $categories = $categoryRepo->findBy(['enabled' => true]);
 
         $currentPage = $request->query->get('page', 1);
         $postRepo = $this->get('ekyna_blog.post.repository');
-        $pager = $postRepo->createPager($currentPage);
+        $pager = $postRepo->getPaginatedList($currentPage);
         /** @var \Ekyna\Bundle\BlogBundle\Model\PostInterface[] $posts */
         $posts = $pager->getCurrentPageResults();
 
@@ -117,7 +117,7 @@ class ExampleController extends Controller
 
         $currentPage = $request->query->get('page', 1);
         $postRepo = $this->get('ekyna_blog.post.repository');
-        $pager = $postRepo->createPager($currentPage, $category);
+        $pager = $postRepo->getPaginatedList($currentPage, $category);
         /** @var \Ekyna\Bundle\BlogBundle\Model\PostInterface[] $posts */
         $posts = $pager->getCurrentPageResults();
 

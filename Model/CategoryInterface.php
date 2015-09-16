@@ -2,6 +2,7 @@
 
 namespace Ekyna\Bundle\BlogBundle\Model;
 
+use Ekyna\Bundle\AdminBundle\Model\TranslatableInterface;
 use Ekyna\Bundle\CmsBundle\Model as Cms;
 use Ekyna\Bundle\CoreBundle\Model as Core;
 
@@ -15,7 +16,8 @@ interface CategoryInterface extends
     Cms\ContentSubjectInterface,
     Core\SortableInterface,
     Core\TimestampableInterface,
-    Core\TaggedEntityInterface
+    Core\TaggedEntityInterface,
+    TranslatableInterface
 {
 
     /**

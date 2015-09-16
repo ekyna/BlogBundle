@@ -2,7 +2,9 @@
 
 namespace Ekyna\Bundle\BlogBundle\Entity;
 
-use Ekyna\Bundle\AdminBundle\Doctrine\ORM\ResourceRepositoryInterface;
+use Ekyna\Bundle\AdminBundle\Doctrine\ORM\TranslatableResourceRepositoryInterface;
+use Ekyna\Bundle\AdminBundle\Doctrine\ORM\Util\TranslatableResourceRepositoryTrait;
+use Ekyna\Bundle\BlogBundle\Model\CategoryInterface;
 use Gedmo\Sortable\Entity\Repository\SortableRepository;
 
 /**
@@ -10,43 +12,33 @@ use Gedmo\Sortable\Entity\Repository\SortableRepository;
  * @package Ekyna\Bundle\BlogBundle\Entity
  * @author Étienne Dauvergne <contact@ekyna.com>
  */
-class CategoryRepository extends SortableRepository implements ResourceRepositoryInterface
+class CategoryRepository extends SortableRepository implements TranslatableResourceRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $class = $this->getClassName();
-        return new $class;
-    }
+    use TranslatableResourceRepositoryTrait;
 
     /**
-     * Finds one category by slug.
+     * Finds one news by slug.
      *
      * @param string $slug
-     * @return \Ekyna\Bundle\BlogBundle\Model\CategoryInterface|null
+     * @return CategoryInterface|null
      */
     public function findOneBySlug($slug)
     {
-        if (0 === strlen($slug)) {
+        if (0 == strlen($slug)) {
             return null;
         }
 
-        $qb = $this->createQueryBuilder('c');
-        $params = ['slug' => $slug, 'enabled' => true];
+        return $this->findOneBy(array(
+            'enabled' => true,
+            'slug' => $slug
+        ));
+    }
 
-        $qb
-            ->andWhere($qb->expr()->eq('c.enabled', ':enabled'))
-            ->andWhere($qb->expr()->eq('c.slug', ':slug'))
-            ->getQuery()
-        ;
-
-        return $qb
-            ->getQuery()
-            ->setMaxResults(1)
-            ->setParameters($params)
-            ->getOneOrNullResult()
-        ;
+    /**
+     * {@inheritdoc}
+     */
+    protected function getAlias()
+    {
+        return 'c';
     }
 }
