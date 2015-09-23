@@ -18,13 +18,6 @@ interface PostInterface extends
     Core\TaggedEntityInterface
 {
     /**
-     * Returns the id.
-     *
-     * @return integer
-     */
-    public function getId();
-
-    /**
      * Sets the title.
      *
      * @param string $title

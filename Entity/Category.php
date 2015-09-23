@@ -150,7 +150,7 @@ class Category extends AbstractTranslatable implements CategoryInterface
      */
     public function getEntityTags()
     {
-        return array($this->getEntityTag(), Post::getEntityTagPrefix());
+        return [$this->getEntityTag(), Post::getEntityTagPrefix()];
     }
 
     /**

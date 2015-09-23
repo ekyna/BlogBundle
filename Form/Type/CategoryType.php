@@ -18,20 +18,20 @@ class CategoryType extends ResourceFormType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'a2lix_translationsForms', array(
+            ->add('translations', 'a2lix_translationsForms', [
                 'form_type' => new CategoryTranslationType(),
                 'label'     => false,
-                'attr' => array(
+                'attr' => [
                     'widget_col' => 12,
-                ),
-            ))
-            ->add('enabled', 'checkbox', array(
+                ],
+            ])
+            ->add('enabled', 'checkbox', [
                 'label' => 'ekyna_core.field.enabled',
                 'required' => false,
-                'attr' => array(
+                'attr' => [
                     'align_with_widget' => true,
-                ),
-            ))
+                ],
+            ])
             ->add('seo', 'ekyna_cms_seo')
         ;
     }

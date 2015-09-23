@@ -41,10 +41,10 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('category')
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('templates')->defaultValue(array(
+                                ->variableNode('templates')->defaultValue([
                                     '_form.html' => 'EkynaBlogBundle:Admin/Category:_form.html',
                                     'show.html'  => 'EkynaBlogBundle:Admin/Category:show.html',
-                                ))->end()
+                                ])->end()
                                 ->scalarNode('parent')->end()
                                 ->scalarNode('entity')->defaultValue('Ekyna\Bundle\BlogBundle\Entity\Category')->end()
                                 ->scalarNode('controller')->defaultValue('Ekyna\Bundle\BlogBundle\Controller\Admin\CategoryController')->end()
@@ -59,7 +59,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->end()
                                         ->arrayNode('fields')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(array('name', 'slug'))
+                                            ->defaultValue(['name', 'slug'])
                                         ->end()
                                     ->end()
                                 ->end()
@@ -69,10 +69,10 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()
                             ->addDefaultsIfNotSet()
                             ->children()
-                                ->variableNode('templates')->defaultValue(array(
+                                ->variableNode('templates')->defaultValue([
                                     '_form.html' => 'EkynaBlogBundle:Admin/Post:_form.html',
                                     'show.html'  => 'EkynaBlogBundle:Admin/Post:show.html',
-                                ))->end()
+                                ])->end()
                                 ->scalarNode('parent')->end()
                                 ->scalarNode('entity')->defaultValue('Ekyna\Bundle\BlogBundle\Entity\Post')->end()
                                 ->scalarNode('controller')->defaultValue('Ekyna\Bundle\BlogBundle\Controller\Admin\PostController')->end()

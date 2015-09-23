@@ -19,14 +19,6 @@ interface CategoryInterface extends
     Core\TaggedEntityInterface,
     TranslatableInterface
 {
-
-    /**
-     * Returns the id.
-     *
-     * @return integer
-     */
-    public function getId();
-
     /**
      * Sets the name.
      *

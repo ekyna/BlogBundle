@@ -28,10 +28,10 @@ class CategoryRepository extends SortableRepository implements TranslatableResou
             return null;
         }
 
-        return $this->findOneBy(array(
+        return $this->findOneBy([
             'enabled' => true,
             'slug' => $slug
-        ));
+        ]);
     }
 
     /**

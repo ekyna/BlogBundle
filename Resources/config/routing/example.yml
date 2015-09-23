@@ -2,8 +2,7 @@ ekyna_blog_example_index:
     path: ""
     defaults:
         _controller: EkynaBlogBundle:Example:index
-    requirements:
-        _method: GET
+    methods: [GET]
 #    options:
 #        _cms:
 #            name: Blog
@@ -13,14 +12,14 @@ ekyna_blog_example_index:
 ekyna_blog_example_category:
     path: /{categorySlug}
     defaults: { _controller: EkynaBlogBundle:Example:category }
+    methods: [GET]
     requirements:
-        _method: GET
         categorySlug: "[a-zA-Z0-9-]+"
 
 ekyna_blog_example_post:
     path: /{categorySlug}/{postSlug}
     defaults: { _controller: EkynaBlogBundle:Example:post }
+    methods: [GET]
     requirements:
-        _method: GET
         categorySlug: "[a-zA-Z0-9-]+"
         postSlug: "[a-zA-Z0-9-]+"

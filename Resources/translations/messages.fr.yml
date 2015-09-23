@@ -1,4 +1,5 @@
 ekyna_blog:
+    blog: Blog
     category:
         label:
             singular: Catégorie

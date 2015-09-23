@@ -1,38 +1,35 @@
 ekyna_blog_post_admin_home:
     path: ""
     defaults: { _controller: "ekyna_blog.post.controller:homeAction" }
-    requirements:
-        _method: GET
+    methods: [GET]
 
 ekyna_blog_post_admin_list:
     path: /list
     defaults: { _controller: "ekyna_blog.post.controller:listAction" }
-    requirements:
-        _method: GET|POST
+    methods: [GET|POST]
 
 ekyna_blog_post_admin_new:
     path: /new
     defaults: { _controller: "ekyna_blog.post.controller:newAction" }
-    requirements:
-        _method: GET|POST
+    methods: [GET|POST]
 
 ekyna_blog_post_admin_show:
     path: /{postId}/show
     defaults: { _controller: "ekyna_blog.post.controller:showAction" }
+    methods: [GET]
     requirements:
-        _method: GET
         postId:  \d+
 
 ekyna_blog_post_admin_edit:
     path: /{postId}/edit
     defaults: { _controller: "ekyna_blog.post.controller:editAction" }
+    methods: [GET|POST]
     requirements:
-        _method: GET|POST
         postId:  \d+
 
 ekyna_blog_post_admin_remove:
     path: /{postId}/remove
     defaults: { _controller: "ekyna_blog.post.controller:removeAction" }
+    methods: [GET|POST]
     requirements:
-        _method: GET|POST
         postId:  \d+

@@ -31,9 +31,9 @@ class EkynaBlogExtension extends AbstractExtension
         $bundles = $container->getParameter('kernel.bundles');
 
         if (array_key_exists('AsseticBundle', $bundles)) {
-            $container->prependExtensionConfig('assetic', array(
-                'bundles' => array('EkynaBlogBundle')
-            ));
+            $container->prependExtensionConfig('assetic', [
+                'bundles' => ['EkynaBlogBundle']
+            ]);
         }
     }
 }

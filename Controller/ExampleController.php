@@ -42,11 +42,11 @@ class ExampleController extends Controller
         /** @var \Ekyna\Bundle\BlogBundle\Model\PostInterface[] $posts */
         $posts = $postRepo->findLatest($category);
 
-        $response = $this->render('EkynaBlogBundle:Example:side.html.twig', array(
+        $response = $this->render('EkynaBlogBundle:Example:side.html.twig', [
             'categories' => $categories,
             'category'   => $category,
             'posts'      => $posts,
-        ));
+        ]);
 
         $tags = null !== $category ? $category->getEntityTags() : [];
         $tags[] = Category::getEntityTagPrefix();
@@ -78,11 +78,11 @@ class ExampleController extends Controller
         /** @var \Ekyna\Bundle\BlogBundle\Model\PostInterface[] $posts */
         $posts = $pager->getCurrentPageResults();
 
-        $response = $this->render('EkynaBlogBundle:Example:index.html.twig', array(
+        $response = $this->render('EkynaBlogBundle:Example:index.html.twig', [
             'categories' => $categories,
             'pager'      => $pager,
             'posts'      => $posts,
-        ));
+        ]);
 
         $tags = [Post::getEntityTagPrefix()];
         foreach ($categories as $category) {
@@ -121,12 +121,12 @@ class ExampleController extends Controller
         /** @var \Ekyna\Bundle\BlogBundle\Model\PostInterface[] $posts */
         $posts = $pager->getCurrentPageResults();
 
-        $response = $this->render('EkynaBlogBundle:Example:category.html.twig', array(
+        $response = $this->render('EkynaBlogBundle:Example:category.html.twig', [
             'categories' => $categories,
             'category'   => $category,
             'pager'      => $pager,
             'posts'      => $posts,
-        ));
+        ]);
 
         $tags = $category->getEntityTags();
         $tags[] = Category::getEntityTagPrefix();
@@ -168,11 +168,11 @@ class ExampleController extends Controller
         /** @var \Ekyna\Bundle\BlogBundle\Model\CategoryInterface[] $categories */
         $categories = $categoryRepo->findBy(['enabled' => true], ['name' => 'ASC']);
 
-        $response = $this->render('EkynaBlogBundle:Example:post.html.twig', array(
+        $response = $this->render('EkynaBlogBundle:Example:post.html.twig', [
             'categories' => $categories,
             'category'   => $category,
             'post'       => $post,
-        ));
+        ]);
 
         $tags = $post->getEntityTags();
         foreach ($categories as $category) {

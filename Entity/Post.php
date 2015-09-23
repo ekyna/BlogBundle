@@ -174,7 +174,7 @@ class Post implements PostInterface
      */
     public function getEntityTags()
     {
-        return array($this->getEntityTag(), $this->category->getEntityTag());
+        return [$this->getEntityTag(), $this->category->getEntityTag()];
     }
 
     /**
